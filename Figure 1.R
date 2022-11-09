@@ -17,3 +17,15 @@ read_csv('complete_data.csv', guess_max = 10000) %>%
                 Inter_costal_recession, 
                 Pallor, Blood_transfusion, 
                 Total_Population) -> all_data
+
+###########
+# SURVYES #
+
+read_csv('complete_data.csv') %>%
+  group_by(Site, Period) %>%
+  distinct(Detection_Method) %>%
+  mutate(Site = ifelse(Site == "Junju (Kilifi B)", 'Kilifi B', Site),
+         Site = ifelse(Site == "Kadziununi-Mauveni (Kilifi C)", 'Kilifi C', Site),
+         Site = ifelse(Site == "Ngerenya (Kilifi A)", 'Kilifi A', Site),
+         Detection_Method = ifelse(Detection_Method == 'Microsopy', 'Microscopy', Detection_Method)) -> sampling_data
+
